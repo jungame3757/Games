@@ -23,7 +23,12 @@ int main(){
 	srand (time(NULL));
 	ifstream infile("movielist.txt");
 	string line;
-
+	
+	//exeption fix
+	if (!infile) {
+		cout << "can't read file" << endl;
+		return 0;
+	}
 	while (getline(infile, line)){
     	istringstream iss(line);
     	string line;
@@ -32,6 +37,8 @@ int main(){
    			movielist.pb(line);
 		}
 	}
+	//file close
+	infile.close();
 
 	cout<<"-------------The HOLLYWOOD Game-------------"<<endl;
 	cout<<"Rules of the Game"<<endl;
@@ -44,6 +51,7 @@ int main(){
     char y;
     cin>>y;
     cin.clear();
+    cin.ignore(10,'\n'); //exception fix
     lli chances=10;
     lli level=1;
 
@@ -52,7 +60,7 @@ int main(){
 	        cout<<"You are on Level "<<level<<endl;
 	        cout<<"Chances Remaining "<<chances<<endl;
 			string questionstring, answerstring;
-			answerstring=answer(rand()&1205);
+			answerstring = answer(rand()%1140);
 			questionstring=question(answerstring);
 			cout<<"Guess This Movie "<<questionstring<<endl;
 	        set <char> a;
@@ -64,6 +72,12 @@ int main(){
 	        while(chances){
 	        	char temp;
 				cin>>temp;
+			
+				if (getchar() != '\n') {
+					cout << "only enter one letter" << endl;
+					cin.ignore(10, '\n');
+					continue;
+				} //exection fix
 
 				if(a.find(temp)!= a.end())
 					cout<<"letter "<<temp<<" has already been used"<<endl;
