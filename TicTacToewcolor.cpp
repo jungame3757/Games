@@ -23,9 +23,10 @@ int main()
 {
     system ("color 5E" );
 	int player = 1;
-	int i, box_no;
+	//initialize
+	int i, box_no = 0;
 
-	char mark_x_o;
+	char mark_x_o = 0;
     //gameplay();
     cout << endl << " Get Ready to Play Tic Tac Toe " << endl << endl;
 
@@ -36,6 +37,8 @@ int main()
         gameplay(mark_x_o,box_no,player);
 		i = check_win();
 		player++;
+		//cout clear
+		system("cls");
 
 	}while (i == -1);
 
