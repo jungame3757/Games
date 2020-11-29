@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+//add header
+#include <time.h>
 
 #define MAXLENGTH 80
 #define MAX_TRIES 5
@@ -23,7 +25,9 @@ int main()
 		"volatile"
 							  };
 
-	int n = rand () / 5 * 5;
+	//add seed
+	srand(time(NULL));
+	int n = rand() % 5; 	//int n = rand () / 5 * 5
 	strcpy (word, words[n]);
 
 	init_unknown (word, unknown);
@@ -64,7 +68,12 @@ int main()
 			printf ("\nOops! You Lose! Hanged!\n");
 			printf ("The word was : %s\n", word);
 		}
-
+		//clear buffer
+		if (getchar() != '\n') {
+			char string[80];
+			scanf("%s", string);
+			getchar();
+		}
 	}
 	return 0;
 }
